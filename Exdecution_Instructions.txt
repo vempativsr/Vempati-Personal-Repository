@@ -1,0 +1,31 @@
+Instructions to setup and test the program
+------------------------------------------
+1.	Store the project file in a folder and import it into Eclipse.
+2.	Right click on the project, select Maven and then Update project.
+3.	Right click on the project, select Run As.. and select Run Configurations...
+	Select Maven Build. Select New Launch Configuration, select the project folder.
+	Specify the Goal as clean install. Click Apply and Run.
+4.	Right click on the project, select Run As.. and select Run Configurations...
+	Select Maven Build. Select configuration created in previous step.
+	Specify the Goal as package. Click Apply and Run.
+5.	Open browser window and paste the following URL in the address bar:
+	http://s3.amazonaws.com/downloads.northscale.com/memcached-win32-1.4.4-14.zip
+	Open downloads folder, copy it into a new folder: memcached.
+	Open command prompt, go to the folder and execute the following command:
+	memcached -I 10m -m 128 -v
+6.	Open another command prompt, go to the project folder and execute the following command:
+	java -jar target/GoEuroBusRouteMicro.jar
+7.	Open browser window, paste the following URL and press Enter:
+	http://localhost:8080/api/direct?dep_sid=3&arr_sid=6
+	It will display the Json result in the specified format.
+8.	In order to test other input files:
+	Go to the project/assets folder in Eclipse.
+	Open BusRouteFile.txt, paste the required data and save.
+9.	Stop the running Micro service started in step 6 by pressing Ctrl + c and restart using 
+	the same command.
+	Go to the browser window, frame the URL for the required arrival and departure 
+	station IDs and execute.
+10.	Please note that the entries in memcached exist only for 10 minutes,as per the 
+	setting in the code. So the input file need to be tested within that time frame.
+	If you want to continue testing the same input file, it is suggested that you
+	stop and restart the Service.
