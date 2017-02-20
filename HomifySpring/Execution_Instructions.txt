@@ -1,0 +1,97 @@
+HomifySpring project execution instructions:
+
+1. Import the project into Eclipse.
+2. Add Tomcat server to Eclipse.
+3. Execute the project on Tomcat server.
+
+Alternately, download the WAR file and execute it on Tomcat Server.
+
+4. Open Rest client and follow the below steps.
+5. Add a customer using the following details:
+
+   URL: localhost:8080/customerservice/customer/1
+   Method: Post
+   
+JSon in the Body:
+   
+{
+	"customer":
+	{
+		"customerId":1,
+		"customerName":"A",
+		"customerEmail":"A@xyz.com" 
+	}
+}
+
+6. Add a contract using the following details:
+
+   URL: localhost:8080/customerservice/contract/10001
+   Method: Post
+
+JSon in the Body:
+   
+{
+	"customercontract":
+	{
+		"customerId":1,
+		"contractId":10001,
+		"startDate":"20-Feb-2017",
+		"contractType":"A",
+		"revenue":10000.0
+	}
+}
+
+7. Add a contract using the following details:
+
+   URL: localhost:8080/customerservice/contract/10002
+   Method: Post
+{
+	"customercontract":
+	{
+		"customerId":1,
+		"contractId":10002,
+		"startDate":"21-Feb-2017",
+		"contractType":"B",
+		"revenue":10000.0
+	}
+}
+
+8. Fetch Customer and Contracts associated with the Customer
+   using the following details:
+   
+   URL: localhost:8080/customerservice/customer/1
+   Method: Get
+
+9. Fetch the sum of revenues for the specified customer:
+   using the following details:
+   
+   URL: localhost:8080/customerservice/custcontractsum/1
+   Method: Get
+
+10. Fetch the sum of revenues for the specified contract type:
+    using the following details:
+   
+   a. URL: localhost:8080/customerservice/contracttypesum/A
+      Method: Get
+
+   b. URL: localhost:8080/customerservice/contracttypesum/B
+      Method: Get
+
+The special data structures used in the project are:
+
+1. java.util.concurrent.ConcurrentHashMap
+2. com.google.common.collect.HashMultimap
+
+ConcurrentHashMap is a thread safe data structure and is used to store customers.
+HashMultimap is used to store contracts because it can store multiple entries with same key.
+
+Operations cost in terms of Big O notation:
+-------------------------------------------
+
+1. All Post operations will take the same amount of time, irrespective of
+   how many times they are executed, because they create one entry at a time.
+   Each of these operations can be considered as a O(1) algorithm.
+   
+2. The time taken by Get operations may increase as the record count grows, this is because
+   the number of records that need to be scanned will increase.
+   Each of these operations can be considered as 
